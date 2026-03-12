@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PestView – Pricing</title>
+  <meta name="description" content="PestView pricing for pest control companies. Rolling annual visits, active device billing, IoT add-on, enterprise options, and cost calculator." />
+
+  <style>
+    :root{
+      /* Light, PestView-branded */
+      --bg:#f6f8fa;
+      --panel:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+
+      /* PestView teal brand */
+      --accent:#3aa6a6;
+      --accent2:#2f8f8f;
+      --accentSoft: rgba(58,166,166,.10);
+
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --max:1160px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(1200px 500px at 20% -10%, rgba(58,166,166,.18), transparent 55%),
+                  radial-gradient(900px 450px at 90% 0%, rgba(47,143,143,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 16px 70px;}
+
+    /* Header */
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:10px 0 18px;
+      border-bottom:1px solid var(--line);
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{height:44px; width:auto; display:block}
+    .hgroup h1{margin:0; font-size:24px; letter-spacing:.2px}
+    .hgroup p{margin:4px 0 0; color:var(--muted); font-size:13px}
+
+    .top-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .pill{
+      font-size:12px; color:var(--muted);
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+    }
+    .btn{
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      border:none;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#fff;
+      box-shadow:0 10px 22px rgba(58,166,166,.20);
+    }
+    .btn:active{transform:translateY(1px)}
+    .lang{
+      display:flex; gap:8px;
+      padding:6px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+    }
+    .lang .btn{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      background:transparent;
+      font-weight:800;
+    }
+    .lang .btn.active{
+      border-color: rgba(58,166,166,.35);
+      background: var(--accentSoft);
+      color: #0f3b3b;
+    }
+
+    /* Sections */
+    .section{margin-top:26px;}
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    /* Pricing cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    @media(max-width:980px){ .grid{grid-template-columns:1fr} header{flex-direction:column; align-items:flex-start} .top-actions{justify-content:flex-start} }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card-head{
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(58,166,166,.08), transparent);
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background:#fff;
+    }
+    .badge.hot{
+      border:none;
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+    }
+    .planrow{display:flex; justify-content:space-between; align-items:flex-end; gap:10px; margin-top:10px;}
+    .planrow h2{margin:0; font-size:18px}
+    .price{font-weight:1000; font-size:28px}
+    .per{color:var(--muted); font-size:12px; margin-top:2px; text-align:right}
+
+    .card-body{padding:16px}
+    .list{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px}
+    .list li{font-size:13.5px}
+    .hint{margin-top:10px; font-size:12px; color:var(--muted)}
+    .extras{
+      margin-top:12px;
+      border:1px dashed var(--line);
+      background:#fafafa;
+      border-radius:12px;
+      padding:10px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    /* Tables */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    th,td{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      font-size:13px;
+      text-align:left;
+      vertical-align:top;
+    }
+    th{background:#f9fafb; color:var(--muted); font-weight:900}
+    tr:last-child td{border-bottom:none}
+
+    /* Calculator */
+    .calcgrid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    @media(max-width:980px){ .calcgrid{grid-template-columns:1fr} }
+
+    .field label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+    .field input,.field select{
+      width:100%;
+      padding:10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:14px;
+      outline:none;
+    }
+    .field input:focus,.field select:focus{
+      border-color: rgba(58,166,166,.45);
+      box-shadow:0 0 0 4px rgba(58,166,166,.12);
+    }
+    .result{
+      margin-top:14px;
+      border-radius:14px;
+      border:1px solid rgba(58,166,166,.35);
+      background: rgba(58,166,166,.08);
+      padding:14px;
+      font-size:14px;
+    }
+    .result small{color:var(--muted)}
+    .split{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:28px;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .muted{color:var(--muted)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="brand">
+        <!-- Put pestview-logo.png in the same folder as this HTML -->
+        <img class="logo" src="pestview-logo.png" alt="PestView" />
+        <div class="hgroup">
+          <h1 id="t_page_title">PestView Pricing</h1>
+          <p id="t_page_subtitle">Pricing for pest control companies (providers)</p>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <span class="pill" id="t_currency_pill">Currency: EUR (€)</span>
+        <a class="btn primary" href="mailto:sales@pestview.io" id="t_cta">Request demo</a>
+
+        <div class="lang" aria-label="Language switch">
+          <button class="btn active" id="btn_el" type="button">ΕΛ</button>
+          <button class="btn" id="btn_en" type="button">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PRICING -->
+    <section class="section">
+      <div class="panel">
+        <div class="split">
+          <div>
+            <h2 id="t_pricing_title" style="margin:0 0 4px">Subscription plans</h2>
+            <div class="muted" id="t_pricing_note">Unlimited users on all plans. Visits are annual (rolling 12 months). Devices are billed per active installed unit.</div>
+          </div>
+        </div>
+
+        <div class="grid" id="plans"></div>
+      </div>
+    </section>
+
+    <!-- IOT ADD-ON -->
+    <section class="section">
+      <div class="panel">
+        <h2 id="t_iot_title" style="margin:0 0 8px">IoT Monitoring Add-On</h2>
+        <table>
+          <thead>
+            <tr>
+              <th id="t_iot_col1">Item</th>
+              <th id="t_iot_col2">Price</th>
+              <th id="t_iot_col3">Includes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="t_iot_item">IoT monitoring per device</td>
+              <td><strong id="t_iot_price">2€ / IoT device / month</strong></td>
+              <td id="t_iot_includes">Continuous telemetry, alerts, device history, status & uptime tracking.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="muted" id="t_iot_foot" style="margin-top:10px;font-size:12px">
+          IoT is billed separately and does not replace visit/device allowances.
+        </div>
+      </div>
+    </section>
+
+    <!-- ENTERPRISE -->
+    <section class="section">
+      <div class="panel">
+        <h2 id="t_ent_title" style="margin:0 0 8px">Enterprise / Custom</h2>
+        <table>
+          <thead>
+            <tr>
+              <th id="t_ent_col1">When you need it</th>
+              <th id="t_ent_col2">Includes</th>
+              <th id="t_ent_col3">Pricing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="t_ent_when">
+                5,000+ devices, 50,000+ annual visits, chains/retail networks, SLA requirements, integrations.
+              </td>
+              <td id="t_ent_includes">
+                Custom limits, SLA, dedicated support, integrations (API/ERP/BI), white-label options, account manager.
+              </td>
+              <td id="t_ent_pricing"><strong>Contact sales</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BILLING PRINCIPLES -->
+    <section class="section">
+      <div class="panel">
+        <h2 id="t_rules_title" style="margin:0 0 8px">Billing principles</h2>
+        <table>
+          <thead>
+            <tr>
+              <th id="t_rules_col1">Rule</th>
+              <th id="t_rules_col2">Meaning</th>
+            </tr>
+          </thead>
+          <tbody id="rules"></tbody>
+        </table>
+        <div class="muted" id="t_rules_foot" style="margin-top:10px;font-size:12px">
+          All prices exclude VAT. Intended for pest control companies (providers).
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section class="section" id="calculator">
+      <div class="panel">
+        <h2 id="t_calc_title" style="margin:0 0 4px">Cost calculator</h2>
+        <div class="muted" id="t_calc_note">Plan change resets to the plan minimums. Visits/devices increase only by plan packs (100 / 200 / 500).</div>
+
+        <div class="calcgrid" style="margin-top:14px">
+          <div class="field">
+            <label id="t_calc_plan">Plan</label>
+            <select id="plan">
+              <option value="starter">Starter</option>
+              <option value="pro">Professional</option>
+              <option value="biz">Business</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label id="t_calc_devices">Active devices</label>
+            <input id="devices" type="number" min="0" inputmode="numeric" />
+          </div>
+
+          <div class="field">
+            <label id="t_calc_visits">Annual visits (rolling)</label>
+            <input id="visits" type="number" min="0" inputmode="numeric" />
+          </div>
+
+          <div class="field">
+            <label id="t_calc_iot">IoT devices</label>
+            <input id="iot" type="number" min="0" value="0" inputmode="numeric" />
+          </div>
+        </div>
+
+        <div class="result" id="result"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div id="t_footer_1">Prices exclude VAT. Visit allowances are rolling 12 months. Devices are billed per active installed unit (inspection frequency does not affect billing).</div>
+      <div style="margin-top:6px" id="t_footer_2">© <span id="year"></span> PestView</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // ---------- Content (bilingual) ----------
+    const I18N = {
+      el: {
+        page_title: "Τιμοκατάλογος PestView",
+        page_subtitle: "Τιμολόγηση για εταιρείες απεντόμωσης & μυοκτονίας (providers)",
+        cta: "Ζητήστε demo",
+        currency_pill: "Νόμισμα: EUR (€)",
+        pricing_title: "Πακέτα συνδρομής",
+        pricing_note: "Απεριόριστοι χρήστες σε όλα τα πακέτα. Visits σε ετήσια βάση (rolling 12 μήνες). Συσκευές: χρέωση ανά ενεργή εγκατεστημένη συσκευή.",
+        plans: [
+          {
+            key: "starter",
+            badge: "Starter",
+            hot: false,
+            name: "Starter",
+            price: "39€",
+            per: "/ μήνα",
+            bullets: [
+              "1.200 visits / έτος (rolling 12 μήνες)",
+              "500 ενεργές συσκευές",
+              "Απεριόριστοι χρήστες",
+              "Βασικά reports & audit trail"
+            ],
+            hint: "Ιδανικό για έως ~3 τεχνικούς & 1000 συσκευές",
+            extras: "Extras: +100 visits → 10€ / μήνα · +100 συσκευές → 10€ / μήνα"
+          },
+          {
+            key: "pro",
+            badge: "Most popular",
+            hot: true,
+            name: "Professional",
+            price: "99€",
+            per: "/ μήνα",
+            bullets: [
+              "4.800 visits / έτος (rolling 12 μήνες)",
+              "2000 ενεργές συσκευές",
+              "Απεριόριστοι χρήστες",
+              "Trends & CAPA (basic)",
+              "Audit-ready PDF reports"
+            ],
+            hint: "Ιδανικό για έως ~10 τεχνικούς & 5000 συσκευές",
+            extras: "Extras: +200 visits → 12€ / μήνα · +200 συσκευές → 12€ / μήνα"
+          },
+          {
+            key: "biz",
+            badge: "Business",
+            hot: false,
+            name: "Business",
+            price: "199€",
+            per: "/ μήνα",
+            bullets: [
+              "18.000 visits / έτος (rolling 12 μήνες)",
+              "4.000 ενεργές συσκευές",
+              "Απεριόριστοι χρήστες",
+              "Advanced CAPA & KPIs",
+              "Multi-location management",
+              "Priority support"
+            ],
+            hint: "Ιδανικό για μεγάλες ομάδες & chains",
+            extras: "Extras: +500 visits → 16€ / μήνα · +500 συσκευές → 16€ / μήνα"
+          }
+        ],
+        iot_title: "IoT Monitoring Add-On",
+        iot_col1: "Πρόσθετο",
+        iot_col2: "Τιμή",
+        iot_col3: "Περιλαμβάνει",
+        iot_item: "IoT monitoring ανά συσκευή",
+        iot_price: "2€ / IoT συσκευή / μήνα",
+        iot_includes: "Συνεχής τηλεμετρία, alerts, ιστορικό, status & uptime tracking.",
+        iot_foot: "Το IoT χρεώνεται ξεχωριστά και δεν αντικαθιστά τα όρια visits/devices.",
+        ent_title: "Enterprise / Custom",
+        ent_col1: "Πότε χρειάζεται",
+        ent_col2: "Περιλαμβάνει",
+        ent_col3: "Τιμολόγηση",
+        ent_when: "5.000+ συσκευές, 50.000+ ετήσια visits, chains/retail δίκτυα, SLA απαιτήσεις, integrations.",
+        ent_includes: "Custom limits, SLA, dedicated support, integrations (API/ERP/BI), white-label, account manager.",
+        ent_pricing: "Επικοινωνία με πωλήσεις",
+        rules_title: "Κανόνες χρέωσης",
+        rules: [
+          ["Visits (rolling 12 months)", "Τα visits υπολογίζονται σε κυλιόμενο 12μηνο (όχι αυστηρά ανά μήνα), ώστε να καλύπτεται εποχικότητα."],
+          ["Devices (asset-based)", "Χρέωση ανά ενεργή εγκατεστημένη συσκευή, ανεξάρτητα από τη συχνότητα ελέγχου."],
+          ["Unlimited users", "Δεν υπάρχει χρέωση ανά χρήστη. Μπορείς να μεγαλώσεις την ομάδα χωρίς friction."],
+          ["Overages in packs", "Υπερβάσεις γίνονται μόνο με πακέτα (+100 / +200 / +500 ανάλογα το πλάνο)."],
+          ["Plan changes", "Αλλαγή πλάνου ενημερώνει τα ελάχιστα όρια στον υπολογιστή κόστους."],
+          ["VAT", "Οι τιμές δεν περιλαμβάνουν ΦΠΑ."]
+        ],
+        rules_col1: "Κανόνας",
+        rules_col2: "Ερμηνεία",
+        rules_foot: "Οι τιμές δεν περιλαμβάνουν ΦΠΑ. Αφορά εταιρείες pest control (providers).",
+        calc_title: "Υπολογισμός κόστους",
+        calc_note: "Η αλλαγή πλάνου κάνει reset στα ελάχιστα. Visits/devices αυξάνονται μόνο με πακέτα 100 / 200 / 500.",
+        calc_plan: "Πλάνο",
+        calc_devices: "Ενεργές συσκευές",
+        calc_visits: "Ετήσια visits (rolling)",
+        calc_iot: "IoT συσκευές",
+        footer_1: "Οι τιμές δεν περιλαμβάνουν ΦΠΑ. Visits σε rolling 12 μήνες. Συσκευές: χρέωση ανά ενεργή εγκατεστημένη μονάδα (η συχνότητα ελέγχου δεν επηρεάζει τη χρέωση).",
+        footer_2: "© {{year}} PestView",
+        calc_out: (o) => `
+          <div class="split">
+            <div><strong>Σύνολο:</strong> ${o.total}€ / μήνα</div>
+            <div><small>Plan: ${o.base}€ · Extras: ${o.extras}€ · IoT: ${o.iotCost}€</small></div>
+          </div>
+          <div style="margin-top:8px"><small>
+            Devices: ${o.devices} (min ${o.minDev}, step ${o.step}) ·
+            Visits: ${o.visits} (min ${o.minVis}, step ${o.step}) ·
+            Packs: devices ${o.devPacks} + visits ${o.visPacks}
+          </small></div>
+        `
+      },
+      en: {
+        page_title: "PestView Pricing",
+        page_subtitle: "Pricing for pest control companies (providers)",
+        cta: "Request demo",
+        currency_pill: "Currency: EUR (€)",
+        pricing_title: "Subscription plans",
+        pricing_note: "Unlimited users on all plans. Visits are annual (rolling 12 months). Devices are billed per active installed unit.",
+        plans: [
+          {
+            key: "starter",
+            badge: "Starter",
+            hot: false,
+            name: "Starter",
+            price: "39€",
+            per: "/ month",
+            bullets: [
+              "1,200 visits / year (rolling 12 months)",
+              "500 active devices",
+              "Unlimited users",
+              "Basic reports & audit trail"
+            ],
+            hint: "Ideal for up to ~3 technicians & 1000 devices",
+            extras: "Extras: +100 visits → 10€ / month · +100 devices → 10€ / month"
+          },
+          {
+            key: "pro",
+            badge: "Most popular",
+            hot: true,
+            name: "Professional",
+            price: "99€",
+            per: "/ month",
+            bullets: [
+              "4,800 visits / year (rolling 12 months)",
+              "2000 active devices",
+              "Unlimited users",
+              "Trends & CAPA (basic)",
+              "Audit-ready PDF reports"
+            ],
+            hint: "Ideal for up to ~10 technicians & 5000 devices ",
+            extras: "Extras: +200 visits → 12€ / month · +200 devices → 12€ / month"
+          },
+          {
+            key: "biz",
+            badge: "Business",
+            hot: false,
+            name: "Business",
+            price: "199€",
+            per: "/ month",
+            bullets: [
+              "18,000 visits / year (rolling 12 months)",
+              "4,000 active devices",
+              "Unlimited users",
+              "Advanced CAPA & KPIs",
+              "Multi-location management",
+              "Priority support"
+            ],
+            hint: "Ideal for large teams & chains",
+            extras: "Extras: +500 visits → 16€ / month · +500 devices → 16€ / month"
+          }
+        ],
+        iot_title: "IoT Monitoring Add-On",
+        iot_col1: "Item",
+        iot_col2: "Price",
+        iot_col3: "Includes",
+        iot_item: "IoT monitoring per device",
+        iot_price: "2€ / IoT device / month",
+        iot_includes: "Continuous telemetry, alerts, device history, status & uptime tracking.",
+        iot_foot: "IoT is billed separately and does not replace visit/device allowances.",
+        ent_title: "Enterprise / Custom",
+        ent_col1: "When you need it",
+        ent_col2: "Includes",
+        ent_col3: "Pricing",
+        ent_when: "5,000+ devices, 50,000+ annual visits, chains/retail networks, SLA requirements, integrations.",
+        ent_includes: "Custom limits, SLA, dedicated support, integrations (API/ERP/BI), white-label options, account manager.",
+        ent_pricing: "Contact sales",
+        rules_title: "Billing principles",
+        rules: [
+          ["Visits (rolling 12 months)", "Visits are calculated on a rolling 12-month window to support seasonal workloads."],
+          ["Devices (asset-based)", "Billed per active installed device, regardless of inspection frequency."],
+          ["Unlimited users", "No per-seat pricing. Scale your team without friction."],
+          ["Overages in packs", "Overages are applied only in packs (+100 / +200 / +500 depending on plan)."],
+          ["Plan changes", "Changing plan updates the calculator minimums immediately."],
+          ["VAT", "Prices exclude VAT."]
+        ],
+        rules_col1: "Rule",
+        rules_col2: "Meaning",
+        rules_foot: "Prices exclude VAT. Intended for pest control companies (providers).",
+        calc_title: "Cost calculator",
+        calc_note: "Changing plan resets to plan minimums. Visits/devices increase only by packs (100 / 200 / 500).",
+        calc_plan: "Plan",
+        calc_devices: "Active devices",
+        calc_visits: "Annual visits (rolling)",
+        calc_iot: "IoT devices",
+        footer_1: "Prices exclude VAT. Visit allowances are rolling 12 months. Devices are billed per active installed unit (inspection frequency does not affect billing).",
+        footer_2: "© {{year}} PestView",
+        calc_out: (o) => `
+          <div class="split">
+            <div><strong>Total:</strong> ${o.total}€ / month</div>
+            <div><small>Plan: ${o.base}€ · Extras: ${o.extras}€ · IoT: ${o.iotCost}€</small></div>
+          </div>
+          <div style="margin-top:8px"><small>
+            Devices: ${o.devices} (min ${o.minDev}, step ${o.step}) ·
+            Visits: ${o.visits} (min ${o.minVis}, step ${o.step}) ·
+            Packs: devices ${o.devPacks} + visits ${o.visPacks}
+          </small></div>
+        `
+      }
+    };
+
+    // ---------- Pricing config (calculator logic) ----------
+    // Rules requested:
+    // - cannot go below plan minimums
+    // - increases only by plan pack size (100/200/500)
+    // - plan change resets device/visit inputs to minimums
+    const CFG = {
+      starter: { base: 39, minDev:500,  minVis: 1200,  step: 100, cost: 10 },
+      pro:     { base: 99, minDev:2000,  minVis: 4800,  step: 200, cost: 12 },
+      biz:     { base:199, minDev:4000,  minVis:18000,  step: 500, cost: 16 }
+    };
+
+    // ---------- DOM refs ----------
+    const el = {
+      btn_el: document.getElementById("btn_el"),
+      btn_en: document.getElementById("btn_en"),
+      plans: document.getElementById("plans"),
+      rules: document.getElementById("rules"),
+      year: document.getElementById("year"),
+
+      // text nodes
+      t_page_title: document.getElementById("t_page_title"),
+      t_page_subtitle: document.getElementById("t_page_subtitle"),
+      t_cta: document.getElementById("t_cta"),
+      t_currency_pill: document.getElementById("t_currency_pill"),
+      t_pricing_title: document.getElementById("t_pricing_title"),
+      t_pricing_note: document.getElementById("t_pricing_note"),
+
+      t_iot_title: document.getElementById("t_iot_title"),
+      t_iot_col1: document.getElementById("t_iot_col1"),
+      t_iot_col2: document.getElementById("t_iot_col2"),
+      t_iot_col3: document.getElementById("t_iot_col3"),
+      t_iot_item: document.getElementById("t_iot_item"),
+      t_iot_price: document.getElementById("t_iot_price"),
+      t_iot_includes: document.getElementById("t_iot_includes"),
+      t_iot_foot: document.getElementById("t_iot_foot"),
+
+      t_ent_title: document.getElementById("t_ent_title"),
+      t_ent_col1: document.getElementById("t_ent_col1"),
+      t_ent_col2: document.getElementById("t_ent_col2"),
+      t_ent_col3: document.getElementById("t_ent_col3"),
+      t_ent_when: document.getElementById("t_ent_when"),
+      t_ent_includes: document.getElementById("t_ent_includes"),
+      t_ent_pricing: document.getElementById("t_ent_pricing"),
+
+      t_rules_title: document.getElementById("t_rules_title"),
+      t_rules_col1: document.getElementById("t_rules_col1"),
+      t_rules_col2: document.getElementById("t_rules_col2"),
+      t_rules_foot: document.getElementById("t_rules_foot"),
+
+      t_calc_title: document.getElementById("t_calc_title"),
+      t_calc_note: document.getElementById("t_calc_note"),
+      t_calc_plan: document.getElementById("t_calc_plan"),
+      t_calc_devices: document.getElementById("t_calc_devices"),
+      t_calc_visits: document.getElementById("t_calc_visits"),
+      t_calc_iot: document.getElementById("t_calc_iot"),
+
+      t_footer_1: document.getElementById("t_footer_1"),
+      t_footer_2: document.getElementById("t_footer_2"),
+
+      // calculator inputs
+      plan: document.getElementById("plan"),
+      devices: document.getElementById("devices"),
+      visits: document.getElementById("visits"),
+      iot: document.getElementById("iot"),
+      result: document.getElementById("result"),
+    };
+
+    // ---------- Helpers ----------
+    function clampMin(val, min){
+      const n = Number.isFinite(val) ? val : 0;
+      return Math.max(0, Math.floor(n));
+    }
+
+    function normalizeToPacks(value, min, step){
+      // Enforce minimum and round up to pack increments
+      const safe = Math.max(value, min);
+      const extra = safe - min;
+      const packs = Math.ceil(extra / step);
+      return min + packs * step;
+    }
+
+    // ---------- Render functions ----------
+    let LANG = "en";
+
+    function renderPlans(lang){
+      const t = I18N[lang];
+      el.plans.innerHTML = t.plans.map(p => {
+        const badge = p.hot ? `<span class="badge hot">${p.badge}</span>` : `<span class="badge">${p.badge}</span>`;
+        const bullets = p.bullets.map(b => `<li>${b}</li>`).join("");
+        return `
+          <div class="card">
+            <div class="card-head">
+              ${badge}
+              <div class="planrow">
+                <h2>${p.name}</h2>
+                <div style="text-align:right">
+                  <div class="price">${p.price}</div>
+                  <div class="per">${p.per}</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul class="list">${bullets}</ul>
+              <div class="hint">${p.hint}</div>
+              <div class="extras">${p.extras}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderRules(lang){
+      const t = I18N[lang];
+      el.rules.innerHTML = t.rules.map(([a,b]) => `
+        <tr>
+          <td><strong>${a}</strong></td>
+          <td>${b}</td>
+        </tr>
+      `).join("");
+    }
+
+    function applyTexts(lang){
+      const t = I18N[lang];
+
+      el.t_page_title.textContent = t.page_title;
+      el.t_page_subtitle.textContent = t.page_subtitle;
+      el.t_cta.textContent = t.cta;
+      el.t_currency_pill.textContent = t.currency_pill;
+
+      el.t_pricing_title.textContent = t.pricing_title;
+      el.t_pricing_note.textContent = t.pricing_note;
+
+      el.t_iot_title.textContent = t.iot_title;
+      el.t_iot_col1.textContent = t.iot_col1;
+      el.t_iot_col2.textContent = t.iot_col2;
+      el.t_iot_col3.textContent = t.iot_col3;
+      el.t_iot_item.textContent = t.iot_item;
+      el.t_iot_price.textContent = t.iot_price;
+      el.t_iot_includes.textContent = t.iot_includes;
+      el.t_iot_foot.textContent = t.iot_foot;
+
+      el.t_ent_title.textContent = t.ent_title;
+      el.t_ent_col1.textContent = t.ent_col1;
+      el.t_ent_col2.textContent = t.ent_col2;
+      el.t_ent_col3.textContent = t.ent_col3;
+      el.t_ent_when.textContent = t.ent_when;
+      el.t_ent_includes.textContent = t.ent_includes;
+      el.t_ent_pricing.textContent = t.ent_pricing;
+
+      el.t_rules_title.textContent = t.rules_title;
+      el.t_rules_col1.textContent = t.rules_col1;
+      el.t_rules_col2.textContent = t.rules_col2;
+      el.t_rules_foot.textContent = t.rules_foot;
+
+      el.t_calc_title.textContent = t.calc_title;
+      el.t_calc_note.textContent = t.calc_note;
+      el.t_calc_plan.textContent = t.calc_plan;
+      el.t_calc_devices.textContent = t.calc_devices;
+      el.t_calc_visits.textContent = t.calc_visits;
+      el.t_calc_iot.textContent = t.calc_iot;
+
+      el.t_footer_1.textContent = t.footer_1;
+      el.t_footer_2.textContent = t.footer_2.replace("{{year}}", new Date().getFullYear());
+    }
+
+    function setLang(lang){
+      LANG = lang;
+
+      // toggle buttons
+      el.btn_el.classList.toggle("active", lang === "el");
+      el.btn_en.classList.toggle("active", lang === "en");
+
+      // update html lang
+      document.documentElement.lang = lang === "el" ? "el" : "en";
+
+      applyTexts(lang);
+      renderPlans(lang);
+      renderRules(lang);
+      calc(); // rerender result label text
+    }
+
+    // ---------- Calculator ----------
+    function resetToPlanMinimums(){
+      const p = CFG[el.plan.value];
+      el.devices.value = p.minDev;
+      el.visits.value = p.minVis;
+    }
+
+    function calc(){
+      const p = CFG[el.plan.value];
+      const t = I18N[LANG];
+
+      // read inputs
+      const devIn = clampMin(parseInt(el.devices.value || "0", 10), 0);
+      const visIn = clampMin(parseInt(el.visits.value  || "0", 10), 0);
+      const iotIn = clampMin(parseInt(el.iot.value     || "0", 10), 0);
+
+      // enforce min + packs
+      const finalDev = normalizeToPacks(devIn, p.minDev, p.step);
+      const finalVis = normalizeToPacks(visIn, p.minVis, p.step);
+
+      // write back normalized values (so user sees pack logic)
+      el.devices.value = finalDev;
+      el.visits.value  = finalVis;
+
+      const devPacks = (finalDev - p.minDev) / p.step;
+      const visPacks = (finalVis - p.minVis) / p.step;
+
+      const extras = (devPacks + visPacks) * p.cost;
+      const iotCost = iotIn * 2;
+      const total = p.base + extras + iotCost;
+
+      el.result.innerHTML = t.calc_out({
+        total,
+        base: p.base,
+        extras,
+        iotCost,
+        devices: finalDev,
+        visits: finalVis,
+        minDev: p.minDev,
+        minVis: p.minVis,
+        step: p.step,
+        devPacks,
+        visPacks
+      });
+    }
+
+    // ---------- Events ----------
+    el.btn_el.addEventListener("click", () => setLang("el"));
+    el.btn_en.addEventListener("click", () => setLang("en"));
+
+    el.plan.addEventListener("change", () => {
+      resetToPlanMinimums(); // critical fix: prevent "same big numbers across plans"
+      calc();
+    });
+
+    [el.devices, el.visits, el.iot].forEach(inp => inp.addEventListener("input", calc));
+
+    // ---------- Init ----------
+    el.year.textContent = new Date().getFullYear();
+    // default plan + minimums
+    el.plan.value = "starter";
+    resetToPlanMinimums();
+    setLang("en"); // default language
+  </script>
+</body>
+</html>
