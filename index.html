@@ -52,25 +52,63 @@ a{
   color:white;
   transform:translateY(-3px);
 }
+
+/* Language switch */
+.lang-switch{
+  position:absolute;
+  top:20px;
+  right:20px;
+}
+
+.lang-switch button{
+  background:white;
+  border:none;
+  padding:8px 12px;
+  margin-left:5px;
+  cursor:pointer;
+  border-radius:6px;
+  font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
+<!-- LANGUAGE SWITCH -->
+<div class="lang-switch">
+  <button onclick="setLang('el')">GR</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
 <div class="container">
-  <h1>Επιλογή Τιμοκαταλόγου</h1>
+
+  <h1 id="title">Επιλογή Τιμοκαταλόγου</h1>
 
   <div class="buttons">
     <a href="old_price_list.index.html">
-      <div class="btn">📄 Παλιός Τιμοκατάλογος</div>
+      <div class="btn" id="oldBtn">📄 Παλιός Τιμοκατάλογος</div>
     </a>
 
     <a href="new_price_list.index.html">
-      <div class="btn">🚀 Νέος Τιμοκατάλογος</div>
+      <div class="btn" id="newBtn">🚀 Νέος Τιμοκατάλογος</div>
     </a>
   </div>
 
 </div>
+
+<script>
+function setLang(lang){
+  if(lang === 'en'){
+    document.getElementById('title').innerText = "Select Pricing Plan";
+    document.getElementById('oldBtn').innerText = "📄 Old Pricing";
+    document.getElementById('newBtn').innerText = "🚀 New Pricing";
+  } else {
+    document.getElementById('title').innerText = "Επιλογή Τιμοκαταλόγου";
+    document.getElementById('oldBtn').innerText = "📄 Παλιός Τιμοκατάλογος";
+    document.getElementById('newBtn').innerText = "🚀 Νέος Τιμοκατάλογος";
+  }
+}
+</script>
 
 </body>
 </html>
